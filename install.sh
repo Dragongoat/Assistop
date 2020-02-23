@@ -27,6 +27,12 @@ sudo apt install -y -qq avahi-daemon
 # Set hostname to assistop
 sudo sed -i 's/127\.0\.1\.1[[:blank:]]*raspberrypi/127.0.1.1\tassistop/1' /etc/hosts
 sudo cp ./templates/hostname.template /etc/hostname
+sudo /etc/init.d/hostname.sh
+
+# Rename hotspot network
+sudo sed -i 's/ssid=raspi-webgui/ssid=Assistop/g' /etc/hostapd/hostapd.conf
+
+sudo rfkill unblock wifi; sudo rfkill unblock all
 
 # Link to install Docker: https://linuxhint.com/install_docker_on_raspbian_os/
 
