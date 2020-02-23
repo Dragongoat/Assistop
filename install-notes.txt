@@ -1,7 +1,0 @@
-Link to install RaspAP: https://howtoraspberrypi.com/create-a-wi-fi-hotspot-in-less-than-10-minutes-with-pi-raspberry/
-
-Link to install Docker: https://linuxhint.com/install_docker_on_raspbian_os/
-
-Link to install Docker-compose: https://stackoverflow.com/questions/58747879/docker-compose-usr-local-bin-docker-compose-line-1-not-command-not-found
-
-Link to install Django: https://realpython.com/django-setup/
