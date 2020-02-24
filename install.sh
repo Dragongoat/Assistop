@@ -1,5 +1,10 @@
 # Assistop install script
 
+# Install dependencies for install
+sudo apt update -y -qq
+sudo apt upgrade -y -qq
+sudo apt install -y -qq curl wget
+
 # Link to install RaspAP: https://howtoraspberrypi.com/create-a-wi-fi-hotspot-in-less-than-10-minutes-with-pi-raspberry/
 # Free up the wireless interface
 echo 'Freeing up wireless interface. Previous configuration saved at /etc/wpa_supplicant.conf.sav'
@@ -37,6 +42,31 @@ sudo rfkill unblock wifi; sudo rfkill unblock all
 
 # Link to install Docker: https://linuxhint.com/install_docker_on_raspbian_os/
 
+# Install necessary headers for docker to work
+sudo apt install -y -qq raspberrypi-kernel raspberrypi-kernel-headers
+
+# Use Docker quick install script
+curl -sSL https://get.docker.com | sh
+
+# Add user pi to docker group
+sudo usermod -aG docker pi
+
 # Link to install Docker-compose: https://stackoverflow.com/questions/58747879/docker-compose-usr-local-bin-docker-compose-line-1-not-command-not-found
 
-# Link to install Django: https://realpython.com/django-setup/
+# Install latest version of docker-compose via pip3
+sudo apt install python3-pip
+yes | sudo pip3 install docker-compose
+
+echo 'Installation complete. A reboot is required to finish installation.'
+while true
+do
+	read -p 'Reboot now? (Y/N): ' answer
+	case $answer in 
+		[yY]* ) sudo reboot now
+			break;;
+
+		[nN]* ) exit;;
+
+		* )     echo "Error, please enter Y or N.";;
+	esac
+done
