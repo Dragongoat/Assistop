@@ -1,24 +1,26 @@
+# Assistop install script
+
 # Link to install RaspAP: https://howtoraspberrypi.com/create-a-wi-fi-hotspot-in-less-than-10-minutes-with-pi-raspberry/
 # Free up the wireless interface
-echo 'Freeing up wireless interface. Previous configuration saved at /etc/wpa_supplicant.conf.sav.'
+echo 'Freeing up wireless interface. Previous configuration saved at /etc/wpa_supplicant.conf.sav'
 sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.conf.sav
 sudo cp ./templates/wpa_supplicant.conf.template /etc/wpa_supplicant/wpa_supplicant.conf
 
-# Install hostapd and RaspAP
-echo 'Installing hostapd and RaspAP.'
-wget -q https://git.io/voEUQ -O /tmp/raspap && bash /tmp/raspap
+# Install hostapd and RaspAP using quick installer
+echo 'Installing hostapd and RaspAP'
+wget -q https://git.io/voEUQ -O /tmp/raspap && bash /tmp/raspap -y -o 0
 
-echo 'Configuring network interfaces to static.'
+echo 'Configuring network interfaces to static'
 # Set static IP for eth0 and wlan0
 sudo cp ./templates/interfaces.template /etc/network/interfaces
 
-# Set eth0 static in raspAP files
+# Let raspAP know about eth0 config
 sudo cp ./templates/eth0.ini.template /etc/raspap/networking/eth0.ini 
 
-# Set wlan0 static in raspAP files (10.3.141.1 to work with default RaspAP DHCP setup)
+# Let raspAP know about wlan0 config
 sudo cp ./templates/wlan0.ini.template /etc/raspap/networking/wlan0.ini
 
-echo 'Renaming device.'
+echo 'Renaming device'
 # Make sure device can use hostname.local
 sudo apt update -y -qq
 sudo apt upgrade -y -qq
@@ -27,7 +29,6 @@ sudo apt install -y -qq avahi-daemon
 # Set hostname to assistop
 sudo sed -i 's/127\.0\.1\.1[[:blank:]]*raspberrypi/127.0.1.1\tassistop/1' /etc/hosts
 sudo cp ./templates/hostname.template /etc/hostname
-sudo /etc/init.d/hostname.sh
 
 # Rename hotspot network
 sudo sed -i 's/ssid=raspi-webgui/ssid=Assistop/g' /etc/hostapd/hostapd.conf
