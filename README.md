@@ -6,4 +6,4 @@ Created By:
  - Jacob Pawek
  - Garrett Welton
 
-Assistop is a IoT governer. It is designed to enhance the security of home assistance integrated within Smart Homes. When a user is not at home, it disables the assistants from being able to make critical changes.
+Assistop is an IoT governer. It is designed to enhance the security of home assistants integrated within Smart Homes. When a user is not at home, it disables the assistants from being able to make critical changes.
