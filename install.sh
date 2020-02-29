@@ -54,7 +54,7 @@ sudo usermod -aG docker pi
 # Link to install Docker-compose: https://stackoverflow.com/questions/58747879/docker-compose-usr-local-bin-docker-compose-line-1-not-command-not-found
 
 # Install latest version of docker-compose via pip3
-sudo apt install python3-pip
+sudo apt install python3-pip -y
 yes | sudo pip3 install docker-compose
 
 echo 'Installation complete. A reboot is required to finish installation.'
