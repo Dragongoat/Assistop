@@ -20,7 +20,7 @@ echo 'Configuring network interfaces to static'
 
 #Get the dhcp info and set it as static
 staticip=`ip addr show eth0 | grep -Po "inet \d+\.\d+\.\d+\.\d+" | sed "s/inet //"`
-gateway=`ip route | grep default | grep -Po "\d+\.\d+\.\d+\.\d+"`
+gateway=`ip route | grep default | grep -Po -m 1 "\d+\.\d+\.\d+\.\d+" | head -1`
 network=`echo $staticip | sed "s/\([0-9]\+\.[0-9]\+\.[0-9]\+\.\)[0-9]\+/\10/"`
 
 # Set static IP for eth0 and wlan0
