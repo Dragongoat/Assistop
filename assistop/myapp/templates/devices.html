@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="app-dashboard shrink-medium">
+    <div class="row expanded app-dashboard-top-nav-bar">
+        <div class="columns medium-2">
+            <button data-toggle="app-dashboard-sidebar" class="menu-icon hide-for-medium"></button>
+            <a class="app-dashboard-logo">Assistop Control Panel</a>
+        </div>
+    </div>
+
+    <div class="app-dashboard-body off-canvas-wrapper">
+        <div id="app-dashboard-sidebar" class="app-dashboard-sidebar position-left off-canvas off-canvas-absolute reveal-for-medium" data-off-canvas>
+            <div class="app-dashboard-sidebar-title-area">
+                <div class="app-dashboard-close-sidebar">
+                    <h3 class="app-dashboard-sidebar-block-title">Menu</h3>
+                    <!-- Close button -->
+                    <button id="close-sidebar" data-app-dashboard-toggle-shrink class="app-dashboard-sidebar-close-button show-for-medium" aria-label="Close menu" type="button">
+                    <span aria-hidden="true"><a href="#"><i class="large fa fa-angle-double-left"></i></a></span>
+                    </button>
+                </div>
+                <div class="app-dashboard-open-sidebar">
+                    <button id="open-sidebar" data-app-dashboard-toggle-shrink class="app-dashboard-open-sidebar-button show-for-medium" aria-label="open menu" type="button">
+                    <span aria-hidden="true"><a href="#"><i class="large fa fa-angle-double-right"></i></a></span>
+                    </button>
+                </div>
+            </div>
+            <div class="app-dashboard-sidebar-inner">
+                <ul class="menu vertical">
+                    <li><a href="/">
+                        <i class="large fa fa-tachometer-alt"></i><span class="app-dashboard-sidebar-text">Dashboard</span>
+                    </a></li>
+                    <li><a href="/assistants">
+                        <i class="large fa fa-robot"></i><span class="app-dashboard-sidebar-text">My Assistants</span>
+                    </a></li>
+                    <li><a href="/devices" class="is-active">
+                        <i class="large fa fa-mobile-alt"></i><span class="app-dashboard-sidebar-text">My Devices</span>
+                    </a></li>
+                    <li><a href="/schedule">
+                        <i class="large fa fa-clock"></i><span class="app-dashboard-sidebar-text">Schedule</span>
+                    </a></li>
+                    <li><a href="/notifications">
+                        <i class="large fa fa-bell"></i><span class="app-dashboard-sidebar-text">Notifications</span>
+                    </a></li>
+                    <li><a href="/hotspot">
+                        <i class="large fa fa-wifi"></i><span class="app-dashboard-sidebar-text">Hotspot</span>
+                    </a></li>
+                    <li><a href="/system">
+                        <i class="large fa fa-cogs"></i><span class="app-dashboard-sidebar-text">System</span>
+                    </a></li>
+                    <li><a href="/about">
+                        <i class="large fa fa-info-circle"></i><span class="app-dashboard-sidebar-text">About</span>
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
+            <h2 class="text-center">My Devices</h2>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

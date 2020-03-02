@@ -25,7 +25,7 @@ SECRET_KEY = 'ip9d^h84ecuwctnv!k2&%-&*w=(jw-*gp%^5%vsxwu8)na-y0e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['assistop.local']
+ALLOWED_HOSTS = ['localhost', 'assistop.local']
 
 
 # Application definition
