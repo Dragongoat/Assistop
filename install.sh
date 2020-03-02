@@ -32,7 +32,7 @@ done < ./templates/interfaces.template > /etc/network/interfaces
 # Let rapAP know about eth0
 while read line
 do
-        echo $line | sed "s/192.168.1.1/$gateway/g" | sed "s/192.168.1.0/$network/g" | sed "s/192.168.1.99/$staticip/g"
+        echo $line | sed "s/192.168.1.1/$gateway/g" | sed "s/192.168.1.99/$staticip/g"
 done < ./templates/eth0.ini.template > /etc/raspap/networking/eth0.ini
 
 # Let rapAP know about wlan0
