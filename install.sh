@@ -17,14 +17,29 @@ wget -q https://git.io/voEUQ -O /tmp/raspap && bash /tmp/raspap -y -o 0
 
 echo 'Configuring network interfaces to static'
 # Set static IP for eth0 and wlan0
-sudo cp ./templates/interfaces.template /etc/network/interfaces
 
-# Let raspAP know about eth0 config
-sudo cp ./templates/eth0.ini.template /etc/raspap/networking/eth0.ini 
+#Get the dhcp info and set it as static
+staticip=`ip addr show eth0 | grep -Po "inet \d+\.\d+\.\d+\.\d+" | sed "s/inet //"`
+gateway=`ip route | grep default | grep -Po -m 1 "\d+\.\d+\.\d+\.\d+" | head -1`
+network=`echo $staticip | sed "s/\([0-9]\+\.[0-9]\+\.[0-9]\+\.\)[0-9]\+/\10/"`
 
-# Let raspAP know about wlan0 config
-sudo cp ./templates/wlan0.ini.template /etc/raspap/networking/wlan0.ini
+# Set static IP for eth0 and wlan0
+while read line
+do
+        echo $line | sed "s/192.168.1.1/$gateway/g" | sed "s/192.168.1.0/$network/g" | sed "s/192.168.1.99/$staticip/g"
+done < ./templates/interfaces.template > /etc/network/interfaces
 
+# Let rapAP know about eth0
+while read line
+do
+        echo $line | sed "s/192.168.1.1/$gateway/g" | sed "s/192.168.1.99/$staticip/g"
+done < ./templates/eth0.ini.template > /etc/raspap/networking/eth0.ini
+
+# Let rapAP know about wlan0
+while read line
+do
+        echo $line | sed "s/192.168.1.1/$gateway/g" 
+done < ./templates/wlan0.ini.template > /etc/raspap/networking/wlan0.ini
 echo 'Renaming device'
 # Make sure device can use hostname.local
 sudo apt update -y -qq
@@ -54,7 +69,7 @@ sudo usermod -aG docker pi
 # Link to install Docker-compose: https://stackoverflow.com/questions/58747879/docker-compose-usr-local-bin-docker-compose-line-1-not-command-not-found
 
 # Install latest version of docker-compose via pip3
-sudo apt install python3-pip
+sudo apt install python3-pip -y
 yes | sudo pip3 install docker-compose
 
 echo 'Installation complete. A reboot is required to finish installation.'
