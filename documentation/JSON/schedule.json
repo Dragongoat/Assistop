@@ -2,7 +2,7 @@
   "disable": {
     "start": "9:00",
     "end": "17:00",
-    "days": [{
+    "days": {
       "sunday": false,
       "monday": true,
       "tuesday": true,
@@ -10,7 +10,7 @@
       "thursday": true,
       "friday": true,
       "saturday": false,
-      }]
+      }
   },
   "events": [{
     "date": "2020-04-23T19:35:16.511Z",
