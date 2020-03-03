@@ -9,15 +9,17 @@
       "wednesday": true,
       "thursday": true,
       "friday": true,
-      "saturday": false,
-      }
+      "saturday": false
+    }
   },
-  "events": [{
-    "date": "2020-04-23T19:35:16.511Z",
-    "action": "..."
-  },
-  {
-    "date": "2020-05-23T19:35:16.511Z",
-    "action": "..."
-    }]
+  "events": [
+    {
+      "date": "2020-04-23T19:35:16.511Z",
+      "action": "..."
+    },
+    {
+      "date": "2020-05-23T19:35:16.511Z",
+      "action": "..."
+    }
+  ]
 }
