@@ -1,0 +1,30 @@
+{
+  "controllerDevices": [
+    {
+      "UserName": "User's Phone",
+      "ModelName": "iPhone 7 Plus",
+      "MAC": "FF-FF-FF-FF-FF-FF",
+      "IPv4": "FFF.FFF.F.F"
+    },
+    {
+      "UserName": "User's Phone",
+      "ModelName": "iPhone 8",
+      "MAC": "FF-FF-FF-FF-FF-FF",
+      "IPv4": "FFF.FFF.F.F"
+    }
+  ],
+  "controlledDevices": [
+    {
+      "UserName": "User's Home",
+      "ModelName": "Google Home",
+      "MAC": "FF-FF-FF-FF-FF-FF",
+      "IPv4": "FFF.FFF.F.F"
+    },
+    {
+      "UserName": "User's Lock",
+      "ModelName": "smartLock",
+      "MAC": "FF-FF-FF-FF-FF-FF",
+      "IPv4": "FFF.FFF.F.F"
+    }
+  ]
+}
