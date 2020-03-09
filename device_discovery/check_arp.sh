@@ -3,4 +3,4 @@
 nmap -sn 10.0.0.0/24 &>/dev/null
 
 arp -a &>/dev/null
-arp -a | awk '{if($4 != "<incomplete>"){print (substr($2, 2, length($2)-2), $4)}}'
+arp -a -i eth0 | awk '{if($4 != "<incomplete>"){print (substr($2, 2, length($2)-2), $4)}}'
