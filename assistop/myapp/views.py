@@ -16,10 +16,15 @@ def assistants(request):
     return render(request, "assistants.html", context=context)
 
 def devices(request):
-    context={
-        "title": "Assistop: My Devices",
-    }
-    return render(request, "devices.html", context=context)
+	import json
+	with open('/code/documentation/JSON/devices.json') as f:
+		d = json.load(f)
+		controllerDic = d['controllerDevices']
+		context={
+			"title": "Assistop: My Devices",
+		}
+		context['controllerDevices'] = controllerDic
+		return render(request, "devices.html", context=context)
 
 def schedule(request):
     context={

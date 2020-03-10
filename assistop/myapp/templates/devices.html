@@ -59,6 +59,25 @@
 
         <div class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
             <h2 class="header text-center">My Devices</h2>
+            <table class="responsive-card-table unstriped">
+              <thead>
+                <tr>
+                  <th>User Device Name</th>
+                  <th>Device Model</th>
+                  <th>MAC</th>
+                  <th>IPv4</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for device in controllerDevices %}
+                <tr>
+                  {% for key, value in device.items %}
+                  <td data-label={{key}}> {{value}} </td>
+                  {% endfor %}
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
         </div>
     </div>
 </div>
