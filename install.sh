@@ -1,5 +1,7 @@
 # Assistop install script
 
+echo "Initializing Assistop installation..."
+
 # Install dependencies for install
 sudo apt update -y -qq
 sudo apt upgrade -y -qq
@@ -54,6 +56,8 @@ sudo cp ./templates/hostname.template /etc/hostname
 sudo sed -i 's/ssid=raspi-webgui/ssid=Assistop/g' /etc/hostapd/hostapd.conf
 
 sudo rfkill unblock wifi; sudo rfkill unblock all
+
+sed -i "s/^\(server\.port *= *\)[0-9]*/\18080/g" /etc/lighttpd/lighttpd.conf
 
 # Link to install Docker: https://linuxhint.com/install_docker_on_raspbian_os/
 
