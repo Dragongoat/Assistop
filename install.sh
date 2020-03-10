@@ -1,5 +1,7 @@
 # Assistop install script
 
+echo "Initializing Assistop installation..."
+
 # Install dependencies for install
 sudo apt update -y -qq
 sudo apt upgrade -y -qq
