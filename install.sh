@@ -55,6 +55,8 @@ sudo sed -i 's/ssid=raspi-webgui/ssid=Assistop/g' /etc/hostapd/hostapd.conf
 
 sudo rfkill unblock wifi; sudo rfkill unblock all
 
+sed -i "s/^\(server\.port *= *\)[0-9]*/\18080/g" /etc/lighttpd/lighttpd.conf
+
 # Link to install Docker: https://linuxhint.com/install_docker_on_raspbian_os/
 
 # Install necessary headers for docker to work
