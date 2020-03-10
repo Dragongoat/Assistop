@@ -5,4 +5,6 @@ $('[data-app-dashboard-toggle-shrink]').on('click', function(e) {
     $(this).parents('.app-dashboard').toggleClass('shrink-medium').toggleClass('shrink-large');
   });
   
-  
+function hotspotCP() {
+  window.open('http://assistop.local:8080')
+}

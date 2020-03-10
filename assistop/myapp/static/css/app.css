@@ -1,4 +1,9 @@
+.header {
+  text-decoration: underline;
+  padding-bottom: 2.5rem;
+}
 
+/* Foundation Building Blocks below */
 .app-dashboard {
     height: 100vh;
     display: -webkit-flex;

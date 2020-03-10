@@ -29,7 +29,7 @@
             </div>
             <div class="app-dashboard-sidebar-inner">
                 <ul class="menu vertical">
-                    <li><a href="/" class="is-active">
+                    <li><a href="/">
                         <i class="large fa fa-tachometer-alt"></i><span class="app-dashboard-sidebar-text">Dashboard</span>
                     </a></li>
                     <li><a href="/assistants">
@@ -44,7 +44,7 @@
                     <li><a href="/notifications">
                         <i class="large fa fa-bell"></i><span class="app-dashboard-sidebar-text">Notifications</span>
                     </a></li>
-                    <li><a href="/hotspot">
+                    <li><a href="/hotspot" class="is-active">
                         <i class="large fa fa-wifi"></i><span class="app-dashboard-sidebar-text">Hotspot</span>
                     </a></li>
                     <li><a href="/system">
@@ -58,7 +58,11 @@
         </div>
 
         <div class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
-            <h2 class="header text-center">Dashboard</h2>
+            <h2 class="header text-center">Hotspot</h2>
+            <div class="text-center">
+                <h5>Click below to open RaspAP Hotspot Control Panel</h5>
+                <img class="alert button" src="{% static "img/raspAP.png" %}" onclick="hotspotCP();">
+            </div>
         </div>
     </div>
 </div>
