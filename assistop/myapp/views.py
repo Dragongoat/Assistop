@@ -22,8 +22,8 @@ def devices(request):
 		controllerDic = d['controllerDevices']
 		context={
 			"title": "Assistop: My Devices",
+			"controllerDevices": controllerDic,
 		}
-		context['controllerDevices'] = controllerDic
 		return render(request, "devices.html", context=context)
 
 def schedule(request):
