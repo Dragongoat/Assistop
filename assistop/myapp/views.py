@@ -1,5 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+import os
+import json
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Create your views here.
 
@@ -16,8 +20,7 @@ def assistants(request):
     return render(request, "assistants.html", context=context)
 
 def devices(request):
-	import json
-	with open('/code/documentation/JSON/devices.json') as f:
+	with open(os.path.join(BASE_DIR, 'myapp/documentation/JSON/devices.json')) as f:
 		d = json.load(f)
 		controllerDic = d['controllerDevices']
 		context={
