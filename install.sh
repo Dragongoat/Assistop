@@ -69,8 +69,8 @@ sudo usermod -aG docker pi
 yes | sudo pip3 install docker-compose
 
 # Add a cron job to run check_devices.py
-(crontab -l ; echo "* * * * * /home/pi/Assistop/device_discovery/check_devices.py") 2>&1 | grep -v "no crontab" | sort | uniq | crontab -
-(crontab -l ; echo "* * * * * (sleep 30 ; /home/pi/Assistop/device_discovery/check_devices.py)") 2>&1 | grep -v "no crontab" | sort | uniq | crontab -
+(crontab -l -u pi; echo "* * * * * /home/pi/Assistop/device_discovery/check_devices.py") 2>&1 | grep -v "no crontab" | sort | uniq | crontab -u pi -
+(crontab -l -u pi; echo "* * * * * (sleep 30 ; /home/pi/Assistop/device_discovery/check_devices.py)") 2>&1 | grep -v "no crontab" | sort | uniq | crontab -u pi -
 
 echo 'Installation complete. A reboot is required to finish installation.'
 while true
