@@ -5,7 +5,7 @@ echo "Initializing Assistop installation..."
 # Install dependencies for install
 sudo apt update -y -qq
 sudo apt upgrade -y -qq
-sudo apt install -y -qq curl wget
+sudo apt install -y -qq curl wget avahi-daemon raspberrypi-kernel raspberrypi-kernel-headers python3-pip nmap
 
 # Link to install RaspAP: https://howtoraspberrypi.com/create-a-wi-fi-hotspot-in-less-than-10-minutes-with-pi-raspberry/
 # Free up the wireless interface
@@ -43,10 +43,6 @@ do
         echo $line | sed "s/192.168.1.1/$gateway/g" 
 done < ./templates/wlan0.ini.template > /etc/raspap/networking/wlan0.ini
 echo 'Renaming device'
-# Make sure device can use hostname.local
-sudo apt update -y -qq
-sudo apt upgrade -y -qq
-sudo apt install -y -qq avahi-daemon
 
 # Set hostname to assistop
 sudo sed -i 's/127\.0\.1\.1[[:blank:]]*raspberrypi/127.0.1.1\tassistop/1' /etc/hosts
@@ -61,9 +57,6 @@ sed -i "s/^\(server\.port *= *\)[0-9]*/\18080/g" /etc/lighttpd/lighttpd.conf
 
 # Link to install Docker: https://linuxhint.com/install_docker_on_raspbian_os/
 
-# Install necessary headers for docker to work
-sudo apt install -y -qq raspberrypi-kernel raspberrypi-kernel-headers
-
 # Use Docker quick install script
 curl -sSL https://get.docker.com | sh
 
@@ -73,8 +66,11 @@ sudo usermod -aG docker pi
 # Link to install Docker-compose: https://stackoverflow.com/questions/58747879/docker-compose-usr-local-bin-docker-compose-line-1-not-command-not-found
 
 # Install latest version of docker-compose via pip3
-sudo apt install python3-pip -y
 yes | sudo pip3 install docker-compose
+
+# Add a cron job to run check_devices.py
+(crontab -l ; echo "* * * * * /home/pi/Assistop/device_discovery/check_devices.py") 2>&1 | grep -v "no crontab" | sort | uniq | crontab -
+(crontab -l ; echo "* * * * * (sleep 30 ; /home/pi/Assistop/device_discovery/check_devices.py)") 2>&1 | grep -v "no crontab" | sort | uniq | crontab -
 
 echo 'Installation complete. A reboot is required to finish installation.'
 while true
