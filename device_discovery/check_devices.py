@@ -1,9 +1,11 @@
 #!/usr/bin/python3
 
 import subprocess
+import os
 
 #runs the bash script and records all of the outputs
-devices = subprocess.run(["./check_arp.sh"], stdout=subprocess.PIPE)
+dir_path = os.path.dirname(os.path.realpath(__file__))
+devices = subprocess.run([dir_path + "/check_arp.sh"], stdout=subprocess.PIPE)
 output = devices.stdout.decode()
 
 #set a flag to differentiate between eth0 and wlan0 when collecting addr

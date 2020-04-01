@@ -1,14 +1,22 @@
 #!/bin/bash
 
-#run nmap to populate arp table
-nmap -sn 10.0.0.0/24 &>/dev/null
+# Get the subnets of eth0 and wlan0
+eth0=$(ip address | grep eth0: -A2 | grep inet | awk '{print $2}')
+wlan0=$(ip address | grep wlan0: -A2 | grep inet | awk '{print $2}')
 
-#run arp and acquire all mac addresses on the eth0 network
-arp -a &>/dev/null
-arp -a -i eth0 | awk '{if($4 != "<incomplete>"){print (substr($2, 2, length($2)-2), $4)}}'
+# run nmap on eth0 network to populate arp table
+nmap -sn $eth0 &>/dev/null
+# wait for entries to be fully updated
+sleep 4
+# list arp table entries
+ip neighbor list nud reachable dev eth0 | awk '{printf "%s %s\n", $1, $3}'
 
-#insert a delimiter so the first program knows when we're on wlan0
+# insert a delimiter to indicate wlan0
 echo $
-#run arp and acquire all mac addresses on the wlan0 network
-arp -a &>/dev/null
-arp -a -i wlan0 | awk '{if($4 != "<incomplete>"){print (substr($2, 2, length($2)-2), $4)}}'
+
+# run nmap on wlan0 network to populate arp table
+nmap -sn $wlan0 &>/dev/null
+# wait for entries to be fully updated
+sleep 4
+# list arp table entries
+ip neighbor list nud reachable dev wlan0 | awk '{printf "%s %s\n", $1, $3}'
