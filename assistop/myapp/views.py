@@ -14,9 +14,13 @@ def index(request):
 	return render(request, "index.html", context = context)
 
 def assistants(request):
-    context={
-        "title": "Assistop: My Assistants",
-    }
+    with open(os.path.join(BASE_DIR, 'myapp/documentation/JSON/devices.json')) as f:
+        d = json.load(f)
+        controlledDic = d['controlledDevices']
+        context={
+            "title": "Assistop: My Assistants",
+            "controlledDevices": controlledDic,
+        }
     return render(request, "assistants.html", context=context)
 
 def devices(request):
