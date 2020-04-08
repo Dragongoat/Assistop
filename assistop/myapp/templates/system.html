@@ -1,7 +1,4 @@
-{% extends "base.html" %}
-{% load static %}
-
-{% block content %}
+{% extends "base.html" %} {% load static %} {% block content %}
 
 <div class="app-dashboard shrink-medium">
     <div class="row expanded app-dashboard-top-nav-bar">
@@ -29,36 +26,106 @@
             </div>
             <div class="app-dashboard-sidebar-inner">
                 <ul class="menu vertical">
-                    <li><a href="/">
-                        <i class="large fa fa-tachometer-alt"></i><span class="app-dashboard-sidebar-text">Dashboard</span>
-                    </a></li>
-                    <li><a href="/assistants">
-                        <i class="large fa fa-robot"></i><span class="app-dashboard-sidebar-text">My Assistants</span>
-                    </a></li>
-                    <li><a href="/devices">
-                        <i class="large fa fa-mobile-alt"></i><span class="app-dashboard-sidebar-text">My Devices</span>
-                    </a></li>
-                    <li><a href="/schedule">
-                        <i class="large fa fa-clock"></i><span class="app-dashboard-sidebar-text">Schedule</span>
-                    </a></li>
-                    <li><a href="/notifications">
-                        <i class="large fa fa-bell"></i><span class="app-dashboard-sidebar-text">Notifications</span>
-                    </a></li>
-                    <li><a href="/hotspot">
-                        <i class="large fa fa-wifi"></i><span class="app-dashboard-sidebar-text">Hotspot</span>
-                    </a></li>
-                    <li><a href="/system" class="is-active">
-                        <i class="large fa fa-cogs"></i><span class="app-dashboard-sidebar-text">System</span>
-                    </a></li>
-                    <li><a href="/about">
-                        <i class="large fa fa-info-circle"></i><span class="app-dashboard-sidebar-text">About</span>
-                    </a></li>
+                    <li>
+                        <a href="/">
+                            <i class="large fa fa-tachometer-alt"></i><span class="app-dashboard-sidebar-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/assistants">
+                            <i class="large fa fa-robot"></i><span class="app-dashboard-sidebar-text">My Assistants</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/devices">
+                            <i class="large fa fa-mobile-alt"></i><span class="app-dashboard-sidebar-text">My Devices</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/schedule">
+                            <i class="large fa fa-clock"></i><span class="app-dashboard-sidebar-text">Schedule</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/notifications">
+                            <i class="large fa fa-bell"></i><span class="app-dashboard-sidebar-text">Notifications</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/hotspot">
+                            <i class="large fa fa-wifi"></i><span class="app-dashboard-sidebar-text">Hotspot</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/system" class="is-active">
+                            <i class="large fa fa-cogs"></i><span class="app-dashboard-sidebar-text">System</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/about">
+                            <i class="large fa fa-info-circle"></i><span class="app-dashboard-sidebar-text">About</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
 
         <div class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
             <h2 class="header text-center">System</h2>
+            <div class="grid-x grid-padding-x">
+                <div class="large-6 cell">
+                    <div class="callout">
+                        <h4 class="text-center">Software Update</h4>
+                        <hr>
+                        <div class="grid-x grid-padding-x">
+                            <div class="cell shrink">
+                                <div class="success button expanded">
+                                    <i class="far fa-check-circle"></i> Check for Updates
+                                </div>
+                            </div>
+                            <div class="cell auto version-label">
+                                <h6>Current software verison: alpha 0.3</h6>
+                            </div>
+                        </div>
+                        <div class="grid-x grid-padding-x">
+                            <div class="cell shrink">
+                                <div class="disabled secondary button expanded">
+                                    <i class="fas fa-sync-alt"></i> Update and Restart
+                                </div>
+                            </div>
+                            <div class="cell auto version-label">
+                                <h6>Your Assistop software is up to date.</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="large-6 cell">
+                    <div class="alert callout">
+                        <h4 class="text-center">Power Options</h4>
+                        <hr>
+                        <div class="grid-x grid-padding-x">
+                            <div class="cell shrink">
+                                <div class="warning button expanded">
+                                    <i class="fas fa-sync-alt"></i> Restart
+                                </div>
+                            </div>
+                            <div class="cell auto">
+                                <h6>Reboot your Assistop. Your home assistants will be temporaily unavailable while the Assistop reboots.</h6>
+                            </div>
+                        </div>
+                        <div class="grid-x grid-padding-x">
+                            <div class="cell shrink">
+                                <div class="alert button expanded">
+                                    <i class="fas fa-power-off"></i> Shutdown
+                                </div>
+                            </div>
+                            <div class="cell auto">
+                                <h6>Power down your Assistop. Your home assistants will be unavailable until the Assistop is turned back on.</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
