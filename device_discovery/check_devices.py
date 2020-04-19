@@ -34,12 +34,12 @@ for line in output.split('\n'):
 devices = {}
 
 #Load up the json object
-with open("../assistop/myapp/documentation/JSON/devices.json", "r") as rfile:
-    try:
+try:
+    with open("../assistop/myapp/documentation/JSON/devices.json", "r") as rfile:
         devices = json.load(rfile)
-    except:
-        #Devices file failed. Assume non existent
-        devices = {"controllerDevices" :[], "controlledDevices" : []}
+except:
+    #Devices file failed. Assume non existent
+    devices = {"controllerDevices" :[], "controlledDevices" : []}
 
 #Ensure ethdev devices are updated within web
 for ethdev in macsEth0:
