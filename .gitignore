@@ -241,4 +241,4 @@ Temporary Items
 *.swp
 
 # Ignore program generated device files
-assistop/
+assistop/myapp/documentation/JSON/
