@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import os
 import json
+import subprocess
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -22,6 +23,28 @@ def assistants(request):
             "controlledDevices": controlledDic,
         }
     return render(request, "assistants.html", context=context)
+
+def toggle(request, ipv4):
+    with open(os.path.join(BASE_DIR, 'myapp/documentation/JSON/devices.json')) as f:
+        d = json.load(f)
+        controlledDic = d['controlledDevices']
+        for device in controlledDic:
+            if device["IPv4"] == ipv4:
+                print(BASE_DIR)
+                path = os.getcwd()
+                print(path)
+                script_path = os.path.join(BASE_DIR, 'myapp/runSSH.sh')
+                if device["online"] == 1:
+                    subprocess.run([script_path, ipv4, "D"])
+                    device["online"] = 0
+                else:
+                    subprocess.run([script_path, ipv4, "A"])
+                    device["online"] = 1
+        d['controlledDevices'] = controlledDic
+
+    with open(os.path.join(BASE_DIR, 'myapp/documentation/JSON/devices.json'), "w") as f:
+        json.dump(d, f)
+    return redirect("/assistants")
 
 def devices(request):
 	with open(os.path.join(BASE_DIR, 'myapp/documentation/JSON/devices.json')) as f:

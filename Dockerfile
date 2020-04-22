@@ -15,3 +15,4 @@ ADD . /code/
 
 # Install any needed packages specified in requirements
 RUN pip install -r requirements.txt
+RUN apt-get update && apt-get -y install expect

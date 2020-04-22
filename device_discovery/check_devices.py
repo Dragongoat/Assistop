@@ -10,7 +10,7 @@ devices = subprocess.run([dir_path + "/check_arp.sh"], stdout=subprocess.PIPE)
 output = devices.stdout.decode()
 
 #set a flag to differentiate between eth0 and wlan0 when collecting addr
-isWlan = False;
+isWlan = False
 #create two lists that will hold our addr
 macsEth0 = [] #Controller devices
 macsWlan0 = [] #Controlled devices
@@ -35,7 +35,7 @@ devices = {}
 
 #Load up the json object
 try:
-    with open("../assistop/myapp/documentation/JSON/devices.json", "r") as rfile:
+    with open(dir_path + "/../assistop/myapp/documentation/JSON/devices.json", "r") as rfile:
         devices = json.load(rfile)
 except:
     #Devices file failed. Assume non existent
@@ -71,14 +71,14 @@ for item in devices["controllerDevices"]:
 #Ensure wlan0 devices are updated within web
 for wlandev in macsWlan0:
     found = None
-    for item in devices["controllerDevices"]:
+    for item in devices["controlledDevices"]:
         if item["MAC"] == wlandev["MAC"]:
             if item["IPv4"] != wlandev["IPv4"]:
                 item["IPv4"] = wlandev["IPv4"]
             item["online"] = 1
             found = True
     if not found:
-        devices["controllerDevices"].append({
+        devices["controlledDevices"].append({
             "UserName": "Unknown",
             "ModelName": "Unknown",
             "MAC": wlandev["MAC"],
@@ -86,7 +86,7 @@ for wlandev in macsWlan0:
             "online": 1
             })
 #Check for offline devices
-for item in devices["controllerDevices"]:
+for item in devices["controlledDevices"]:
     found = None
     for wlandev in macsWlan0:
         if item["MAC"] == wlandev["MAC"]:
@@ -96,5 +96,5 @@ for item in devices["controllerDevices"]:
         item["online"] = 0
 
 #Write to the JSON file
-with open("../assistop/myapp/documentation/JSON/devices.json", "w") as rfile:
+with open(dir_path + "/../assistop/myapp/documentation/JSON/devices.json", "w") as rfile:
     json.dump(devices, rfile)
