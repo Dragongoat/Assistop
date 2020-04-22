@@ -79,15 +79,32 @@
                         <th>Device Model</th>
                         <th>MAC</th>
                         <th>IPv4</th>
+                        <th>Online</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for device in controlledDevices %}
-                    <tr>
-                        {% for key, value in device.items %}
-                        <td data-label={{key}}> {{value}} </td>
-                        {% endfor %}
-                    </tr>
+                        {% if device.online != 1 %}
+                            <tr style="background-color: rgb(255, 102, 102)">
+                        {% else %}
+                            <tr style="background-color: rgb(0, 255, 153)">
+                        {% endif %}
+                                {% for key, value in device.items %}
+                                    {% if key != "online" %}
+                                        <td data-label={{key}}> {{value}} </td>
+                                    {% else %}
+                                        {% if value == 1 %}
+                                            <td data-label={{key}}> Yes </td>
+                                        {% else %}
+                                            <td data-label={{key}}> No </td>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                                <td>
+                                    <a class="button secondary" href="/assistants/toggle/{{device.IPv4}}" style="margin: 0;">Toggle</a>
+                                </td>
+                            </tr>
                     {% endfor %}
                 </tbody>
             </table>
