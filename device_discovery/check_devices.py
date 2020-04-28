@@ -3,6 +3,11 @@
 import subprocess
 import os
 import json
+from mac_vendor_lookup import MacLookup
+
+#Load updated MAC lookup list
+mac = MacLookup()
+mac.update_vendors()
 
 #runs the bash script and records all of the outputs
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -53,7 +58,7 @@ for ethdev in macsEth0:
     if not found:
         devices["controllerDevices"].append({
             "UserName": "Unknown",
-            "ModelName": "Unknown",
+            "Vendor": str(mac.lookup(ethdev["MAC"])),
             "MAC": ethdev["MAC"],
             "IPv4": ethdev["IPv4"],
             "online": 1
@@ -80,7 +85,7 @@ for wlandev in macsWlan0:
     if not found:
         devices["controlledDevices"].append({
             "UserName": "Unknown",
-            "ModelName": "Unknown",
+            "Vendor": str(mac.lookup(wlandev["MAC"])),
             "MAC": wlandev["MAC"],
             "IPv4": wlandev["IPv4"],
             "online": 1
