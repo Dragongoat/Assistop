@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.views.decorators.csrf import csrf_exempt
 import os
 import json
 import subprocess
+from . import forms
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -30,9 +32,7 @@ def toggle(request, ipv4):
         controlledDic = d['controlledDevices']
         for device in controlledDic:
             if device["IPv4"] == ipv4:
-                print(BASE_DIR)
                 path = os.getcwd()
-                print(path)
                 script_path = os.path.join(BASE_DIR, 'myapp/runSSH.sh')
                 if device["online"] == 1:
                     subprocess.run([script_path, ipv4, "D"])
@@ -46,6 +46,22 @@ def toggle(request, ipv4):
         json.dump(d, f)
     return redirect("/assistants")
 
+def nameAssistant(request, ipv4):
+    if request.method == 'POST':
+        form = forms.NameForm(request.POST)
+        if form.is_valid():
+            with open(os.path.join(BASE_DIR, 'myapp/documentation/JSON/devices.json')) as f:
+                d = json.load(f)
+                controlledDic = d['controlledDevices']
+                for device in controlledDic:
+                    if device["IPv4"] == ipv4:
+                        device["UserName"] = form.cleaned_data['dev_name']
+                d['controlledDevices'] = controlledDic
+
+            with open(os.path.join(BASE_DIR, 'myapp/documentation/JSON/devices.json'), "w") as f:
+                json.dump(d, f)
+            return HttpResponseRedirect('/assistants')
+
 def devices(request):
 	with open(os.path.join(BASE_DIR, 'myapp/documentation/JSON/devices.json')) as f:
 		d = json.load(f)
@@ -55,6 +71,22 @@ def devices(request):
 			"controllerDevices": controllerDic,
 		}
 		return render(request, "devices.html", context=context)
+
+def nameDevice(request, ipv4):
+    if request.method == 'POST':
+        form = forms.NameForm(request.POST)
+        if form.is_valid():
+            with open(os.path.join(BASE_DIR, 'myapp/documentation/JSON/devices.json')) as f:
+                d = json.load(f)
+                controllerDic = d['controllerDevices']
+                for device in controllerDic:
+                    if device["IPv4"] == ipv4:
+                        device["UserName"] = form.cleaned_data['dev_name']
+                d['controllerDevices'] = controllerDic
+
+            with open(os.path.join(BASE_DIR, 'myapp/documentation/JSON/devices.json'), "w") as f:
+                json.dump(d, f)
+            return HttpResponseRedirect('/devices')
 
 def schedule(request):
     context={

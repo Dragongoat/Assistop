@@ -80,7 +80,7 @@
                         <th>MAC</th>
                         <th>IPv4</th>
                         <th>Online</th>
-                        <th>Action</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -102,7 +102,28 @@
                                     {% endif %}
                                 {% endfor %}
                                 <td>
-                                    <a class="button secondary" href="/assistants/toggle/{{device.IPv4}}" style="margin: 0;">Toggle</a>
+                                    <div class="open-btn">
+                                        <a class="button secondary" href="/assistants/toggle/{{device.IPv4}}" style="margin-bottom: 0; margin-left: 5px;">
+                                            <i class="fas fa-toggle-on"></i> Toggle
+                                        </a>
+                                        <div class="open-button button" onclick="openForm()" style="margin-bottom: 0; margin-left: 5px;">
+                                            <i class="fas fa-edit"></i> Rename Device
+                                        </div>
+                                        <a class="button alert" href="#" style="margin-bottom: 0; margin-left: 5px;">
+                                            <i class="fas fa-trash-alt"></i> Remove
+                                        </a>
+                                    </div>
+                                    <div class="login-popup">
+                                        <div class="form-popup" id="popupForm">
+                                            <form action="/assistants/name/{{device.IPv4}}" method="post" class="form-container">
+                                                {% csrf_token %}
+                                                <h4>Rename Device</h4>
+                                                <input type="text" id="dev_name" placeholder="Device Name" name="dev_name" required>
+                                                <button type="submit" class="button success btn">Submit</button>
+                                                <button type="button" class="button alert btn cancel" onclick="closeForm()">Close</button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                     {% endfor %}

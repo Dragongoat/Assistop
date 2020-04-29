@@ -10,6 +10,54 @@
 
 /* Foundation Building Blocks below */
 
+
+/* Position the Popup form */
+
+.login-popup {
+    position: fixed;
+    text-align: center;
+    width: 100%;
+}
+
+
+/* Hide the Popup form */
+
+.form-popup {
+    display: none;
+    position: fixed;
+    border: 2px solid #666;
+}
+
+
+/* Styles for the form container */
+
+.form-container {
+    max-width: 300px;
+    padding: 15px;
+    background-color: #fff;
+}
+
+
+/* Full-width for input fields */
+
+.form-container input[type=text] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 22px 0;
+    background: #eee;
+}
+
+
+/* When the inputs get focus, do something */
+
+.form-container input[type=text]:focus {
+    background-color: #ddd;
+}
+
+.form-container .btn {
+    width: 100%;
+}
+
 .app-dashboard {
     height: 100vh;
     display: -webkit-flex;
