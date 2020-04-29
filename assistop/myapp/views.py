@@ -62,6 +62,19 @@ def nameAssistant(request, ipv4):
                 json.dump(d, f)
             return HttpResponseRedirect('/assistants')
 
+def removeAssistant(request, ipv4):
+    with open(os.path.join(BASE_DIR, 'myapp/documentation/JSON/devices.json')) as f:
+        d = json.load(f)
+        controlledDic = d['controlledDevices']
+        for i, device in enumerate(controlledDic):
+            if device["IPv4"] == ipv4:
+                del controlledDic[i]
+        d['controlledDevices'] = controlledDic
+
+        with open(os.path.join(BASE_DIR, 'myapp/documentation/JSON/devices.json'), "w") as f:
+            json.dump(d, f)
+        return HttpResponseRedirect('/assistants')
+
 def devices(request):
 	with open(os.path.join(BASE_DIR, 'myapp/documentation/JSON/devices.json')) as f:
 		d = json.load(f)
@@ -87,6 +100,19 @@ def nameDevice(request, ipv4):
             with open(os.path.join(BASE_DIR, 'myapp/documentation/JSON/devices.json'), "w") as f:
                 json.dump(d, f)
             return HttpResponseRedirect('/devices')
+
+def removeDevice(request, ipv4):
+    with open(os.path.join(BASE_DIR, 'myapp/documentation/JSON/devices.json')) as f:
+        d = json.load(f)
+        controllerDic = d['controllerDevices']
+        for i, device in enumerate(controllerDic):
+            if device["IPv4"] == ipv4:
+                del controllerDic[i]
+        d['controllerDevices'] = controllerDic
+
+        with open(os.path.join(BASE_DIR, 'myapp/documentation/JSON/devices.json'), "w") as f:
+            json.dump(d, f)
+        return HttpResponseRedirect('/devices')
 
 def schedule(request):
     context={
